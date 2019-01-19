@@ -71,16 +71,13 @@ const L = {
 
     // take
     take: (n, lst) => {
-        let arr = []
-        let l = lst
-        let c = n
-        while (!L.isEL(l) && c) {
-            // console.log('l', l)
-            arr.push(l.h())
-            l = l.t()
-            c -= 1
+        if (L.isEL(lst) || !n) {
+            return L.EL
         }
-        return L.fromArray(arr)
+        return {
+            h: () => lst.h(),
+            t: () => L.take(n - 1, lst.t())
+        }
     },
 
     // drop
