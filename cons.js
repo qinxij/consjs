@@ -81,14 +81,12 @@ const L = {
     },
 
     // drop
+    // FIXME: can not make it lazy, why?
     drop: (n, lst) => {
-        let l = lst
-        let c = n
-        while (!L.isEL(l) && c) {
-            l = l.t()
-            c -= 1
+        if (L.isEL(lst) || !n) {
+            return lst
         }
-        return l
+        return L.drop(n - 1, lst.t())
     },
 
     map: (f, lst) => {
