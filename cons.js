@@ -30,7 +30,7 @@ const L = {
 
     //  for Finite List, transfrom to array, the `takeNum` is optional
     //  for Infinite List, take first `takeNum` elements and transfrom to array
-    //                     if `takeNum` is not a valid postive num or 0,
+    //                     if `takeNum` is not a valid postive num or not 0,
     //                     the function will don't work
     toArray: (lst, takeNum) => {
         const arr = []
