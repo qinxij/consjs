@@ -11,10 +11,10 @@ const L = {
     // Example:
     //   cons(1, () => EL) -> [1]
     //   cons(1, () => cons(2, () => EL)) -> [1, 2]
-    cons: (v, f) => ({ h: () => v, t: f}),
+    cons: (v, f) => ({ h: () => v, t: f }),
     // Example:
-    //   cons(1)(EL) -> [1]
-    //   cons(1)(cons(2)(EL)) -> [1, 2]
+    //   cons(1, EL) -> [1]
+    //   cons(1, cons(2 ,EL)) -> [1, 2]
     //   -- make sure the second arg `tail` is existed allready, the E for existed
     consE: (v, tail) => ({ h: () => v, t: () => tail }),
     // uncons
@@ -35,20 +35,15 @@ const L = {
     toArray: (lst, takeNum) => {
         const arr = []
         let l = lst
-        // console.log('lst, takeNum, isEL', lst, takeNum, L.isEL(l))
         if (takeNum || takeNum === 0) {
-            // console.log('IF')
             let c = takeNum
             while (!L.isEL(l) && c) {
-                // console.log('lst, takeNum, isEL', lst, takeNum, L.isEL(lst))
                 arr.push(l.h())
                 l = l.t()
                 c -= 1
             }
         } else {
-            // console.log('ELSE')
             while (!L.isEL(l)) {
-                // console.log('lst, takeNum, isEL', lst, takeNum, L.isEL(lst))
                 arr.push(l.h())
                 l = l.t()
             }
@@ -56,7 +51,6 @@ const L = {
         return arr
     },
 
-    // numFrom = n => cons(n)(consNumFrom(n + 1)) // DO NOT work
     // numFrom: n => L.cons(n, () => L.numFrom(n + 1))
     numFrom: n => {
         return {
@@ -93,7 +87,7 @@ const L = {
     drop: (n, lst) => {
         let l = lst
         let c = n
-        while(!L.isEL(l) && c) {
+        while (!L.isEL(l) && c) {
             l = l.t()
             c -= 1
         }
@@ -128,7 +122,6 @@ const L = {
     },
 
     zip: (l1, l2) => {
-        // return cons([l1.head(), l2.head()])(zip(l1.tail())(l2.tail())) // DO NOT work
         if (L.isEL(l1) || L.isEL(l2)) {
             return L.EL
         }
